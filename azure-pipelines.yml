@@ -23,6 +23,8 @@ stages:
 
 
 - stage: DEV
+  variables:
+  - group: practice-var-grp
   displayName: 'Deploy to dev'
   jobs:
   - deployment: DeployToDev
@@ -37,9 +39,13 @@ stages:
               script: |
                 sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
                 echo $(dev_url)
+                echo $(USERNAME)
+                echo $(PASSWORD)
 
 
 - stage: PREPROD
+  variables:
+  - group: practice-var-grp
   displayName: 'Deploy to preprod' 
   jobs:
   - deployment: DeployToPreprod
@@ -53,8 +59,11 @@ stages:
             inputs:
               script: |
                 sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/preprod.unofficialmentor.com/
+                echo $(preprod_url)
 
 - stage: PROD
+  variables:
+  - group: practice-var-grp
   displayName: 'Deploy to prod'
   jobs:
   - deployment: DeployToProd
@@ -68,6 +77,7 @@ stages:
             inputs:
               script: |
                 sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/prod.unofficialmentor.com/
+                echo $(prod_url)
          
 
 
