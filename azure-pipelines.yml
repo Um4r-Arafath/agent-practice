@@ -24,39 +24,49 @@ stages:
 
 - stage: DEV
   displayName: 'Deploy to dev'
-  environment: DEV
   jobs:
-  - job: 
+  - deployment: DeployToDev
+    environment: DEV
     pool: practice-agent
-    steps:
-    - task: CmdLine@2
-      inputs:
-        script: |
-          sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: CmdLine@2
+            inputs:
+              script: |
+                sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
+
 
 - stage: PREPROD
-  displayName: 'Deploy to preprod'
-  environment: PREPROD
+  displayName: 'Deploy to preprod' 
   jobs:
-    - job:
-      pool: practice-agent
-      steps:
-      - task: CmdLine@2
-        inputs:
-          script: |
-            sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/preprod.unofficialmentor.com/
+  - deployment: DeployToPreprod
+    environment: PREPROD
+    pool: practice-agent
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: CmdLine@2
+            inputs:
+              script: |
+                sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/preprod.unofficialmentor.com/
 
 - stage: PROD
   displayName: 'Deploy to prod'
-  environment: PROD
   jobs:
-    - job:
-      pool: practice-agent
-      steps:
-      - task: CmdLine@2
-        inputs:
-          script: |
-            sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/prod.unofficialmentor.com/
+  - deployment: DeployToProd
+    environment: PROD
+    pool: practice-agent
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: CmdLine@2
+            inputs:
+              script: |
+                sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/prod.unofficialmentor.com/
          
 
 
