@@ -6,8 +6,7 @@
 trigger:
 - main
 
-pool:
-  agent: practice-agent
+pool: practice-agent
 
 steps:
 - script: echo Hello, world!
