@@ -29,6 +29,8 @@ stages:
       steps:
       - task: CmdLine@2
         inputs:
-          script: 'sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/'
+          script: |
+            'sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/'
+            
 
 
