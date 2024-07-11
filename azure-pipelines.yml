@@ -8,11 +8,29 @@ trigger:
 
 pool: practice-agent
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Build
+  displayName: 'Build stage configuration'
+  steps:
+  - script: |
+    echo "Sleep 10 seconds"
+    sleep 10
 
-- script: |
-    cd /home/ubuntu
-    touch test2.txt
-  displayName: 'Run a multi-line script'
+- stage: DEV
+  displayName:
+  steps:
+  - script: |
+    sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
+
+- stage: PREPROD
+  displayName:
+  steps:
+  - script: |
+
+
+stage: PROD
+  displayName:
+  steps:
+  - script: |
+
+
