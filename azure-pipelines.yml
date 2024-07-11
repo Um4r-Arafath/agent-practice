@@ -11,26 +11,24 @@ pool: practice-agent
 stages:
 - stage: Build
   displayName: 'Build stage configuration'
-  steps:
-  - script: |
-    echo "Sleep 10 seconds"
-    sleep 10
+  
+  jobs:
+    - job: 
+      steps:
+        - task: CmdLine@2
+          inputs:
+            script: |
+              echo "Sleep 10s"
+              sleep 10
+
 
 - stage: DEV
   displayName:
-  steps:
-  - script: |
-    sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
-
-- stage: PREPROD
-  displayName:
-  steps:
-  - script: |
-
-
-stage: PROD
-  displayName:
-  steps:
-  - script: |
+  jobs:
+    - job: 
+      steps:
+      - task: CmdLine@2
+        inputs:
+          script: 'sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/'
 
 
