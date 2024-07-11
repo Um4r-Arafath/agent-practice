@@ -13,6 +13,6 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    touch test.txt
-    pwd
+    cd /home/ubuntu
+    touch test2.txt
   displayName: 'Run a multi-line script'
