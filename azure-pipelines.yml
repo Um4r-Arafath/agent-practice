@@ -6,33 +6,57 @@
 trigger:
 - main
 
-#pool: practice-agent
+pool: practice-agent
 
 stages:
 - stage: Build
   displayName: 'Build stage configuration'
-  pool: practice-agent
   jobs:
-    - job: 
-      steps:
-        - task: CmdLine@2
-          inputs:
-            script: |
-              echo "Sleep 10s"
-              sleep 10
+  - job:
+    pool: practice-agent
+    steps:
+      - task: CmdLine@2
+        inputs:
+          script: |
+            echo "Sleep 10s"
+            sleep 10
 
 
 - stage: DEV
-  displayName:
+  displayName: 'Deploy to dev'
   environment: DEV
-  pool: practice-agent
   jobs:
-    - job: 
+  - job: 
+    pool: practice-agent
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: |
+          sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/
+
+- stage: PREPROD
+  displayName: 'Deploy to preprod'
+  environment: PREPROD
+  jobs:
+    - job:
+      pool: practice-agent
       steps:
       - task: CmdLine@2
         inputs:
           script: |
-            'sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/dev.unofficialmentor.com/'
-            
+            sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/preprod.unofficialmentor.com/
+
+- stage: PROD
+  displayName: 'Deploy to prod'
+  environment: PROD
+  jobs:
+    - job:
+      pool: practice-agent
+      steps:
+      - task: CmdLine@2
+        inputs:
+          script: |
+            sudo cp -R /home/ubuntu/myagent/_work/1/s/* /var/www/prod.unofficialmentor.com/
+         
 
 
