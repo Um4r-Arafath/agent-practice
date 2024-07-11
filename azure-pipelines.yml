@@ -6,12 +6,12 @@
 trigger:
 - main
 
-pool: practice-agent
+#pool: practice-agent
 
 stages:
 - stage: Build
   displayName: 'Build stage configuration'
-  
+  pool: practice-agent
   jobs:
     - job: 
       steps:
@@ -24,6 +24,8 @@ stages:
 
 - stage: DEV
   displayName:
+  environment: DEV
+  pool: practice-agent
   jobs:
     - job: 
       steps:
